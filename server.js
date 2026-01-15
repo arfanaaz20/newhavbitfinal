@@ -40,6 +40,7 @@ app.use(
       "http://localhost:5174",
       "http://localhost:5175",
       "https://backendhavitfinal.vercel.app",
+             "https://havbit.in"
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
