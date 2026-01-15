@@ -1,0 +1,109 @@
+// const mongoose = require("mongoose");
+
+// const paymentSchema = new mongoose.Schema(
+//   {
+//     orderId: {
+//       type: String,
+//       required: true,
+//     },
+//     paymentId: {
+//       type: String,
+//     },
+//     signature: {
+//       type: String,
+//     },
+
+//     amount: {
+//       type: Number,
+//       required: true,
+//     },
+
+//     currency: {
+//       type: String,
+//       default: "INR",
+//     },
+
+//     // Customer Details
+//     name: {
+//       type: String,
+//       required: true,
+//     },
+//     email: {
+//       type: String,
+//       required: true,
+//     },
+
+//     status: {
+//       type: String,
+//       enum: ["PENDING", "SUCCESS", "FAILED"],
+//       default: "PENDING",
+//     },
+//   },
+//   { timestamps: true }
+// );
+
+// module.exports = mongoose.model("Payment", paymentSchema);
+
+
+
+
+
+
+// const mongoose = require("mongoose");
+
+// const paymentSchema = new mongoose.Schema({
+//   razorpayOrderId: String,
+//   razorpayPaymentId: String,
+//   signature: String,
+//   customerOrderId: { type: mongoose.Schema.Types.ObjectId, ref: "CustomerOrder" },
+//   customer: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+//   amount: Number,
+//   status: { type: String, enum: ["PENDING", "SUCCESS", "FAILED"], default: "PENDING" },
+// }, { timestamps: true });
+
+// module.exports = mongoose.model("Payment", paymentSchema);
+
+
+
+
+const mongoose = require("mongoose");
+
+const paymentSchema = new mongoose.Schema(
+  {
+    gateway: {
+      type: String,
+      enum: ["CASHFREE", "RAZORPAY"],
+      required: true
+    },
+
+    gatewayOrderId: {
+      type: String,
+      required: true
+    },
+
+    gatewayPaymentId: {
+      type: String,
+      default: null
+    },
+
+    customerOrderId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "CustomerOrder",
+      required: true
+    },
+
+    amount: {
+      type: Number,
+      required: true
+    },
+
+    status: {
+      type: String,
+      enum: ["PENDING", "SUCCESS", "FAILED"],
+      default: "PENDING"
+    }
+  },
+  { timestamps: true }
+);
+
+module.exports = mongoose.model("Payment", paymentSchema);
